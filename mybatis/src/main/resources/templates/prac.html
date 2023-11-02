@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form id="prac">
+        <fieldset>
+            <label for="id">ID</label>
+            <input type="text" placeholder="ID" id="id" name="id" />
+            <br>
+            <label for="pw">PW</label>
+            <input type="password" placeholder="PW" id="pw" name="pw"/>
+            <br>
+            <label for="nick">닉네임</label>
+            <input type="text" placeholder="닉네임" id="nick" name="nick"/>
+        </fieldset>
+    </form>
+    <button type="button" onclick="signup()">회원가입</button>
+    <button type="button" onclick="signin()">로그인</button>
+    <button type="button" onclick="up()">회원정보수정</button>
+    <button type="button" onclick="del()">회원탈퇴</button>
+
+    <script>
+        function signup () {
+            var form = document.getElementById('prac');
+
+            axios.post(`/signup`, {id: form.id.value, pw: form.pw.value, nick: form.nick.value})
+                .then((res)=>{
+                    console.log(res.data);
+                });
+        }
+
+        function signin () {
+            var form = document.getElementById('prac');
+
+            axios.post(`/signin`, {id: form.id.value, pw: form.pw.value, nick: form.nick.value})
+                .then((res)=>{
+                    console.log(res.data);
+                });
+        }
+
+        function up() {
+            var form = document.getElementById('prac');
+
+            axios.post(`/up`, {id: form.id.value, pw: form.pw.value, nick: form.nick.value})
+                .then((res)=>{
+                    console.log(res.data);
+                });
+        }
+
+        function del() {
+            var form = document.getElementById('prac');
+
+            axios.get(`/del?id=${form.id.value}`)
+                .then((res)=>{
+                    console.log(res.data);
+                });
+        }
+    </script>
+</body>
+</html>
