@@ -8,6 +8,7 @@ import com.example.mybatis.mybatis.mapper.MainMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import repository.PersonRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ public class MainService {
     // XML 주입 - SQL쿼리와 Java 객체간의 매핑 정의
     @Autowired
     private MainMapper mainMapper;
+
+    private PersonRepository personRepository; // JPA로 변경
 
     // 실제 데이터베이스에서 가져오는 Users 배열
     public List<UserDTO> getUserList() {
