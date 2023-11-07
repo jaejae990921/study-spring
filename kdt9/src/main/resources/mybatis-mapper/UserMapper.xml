@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.kdt9.mapper.UserMapper"> <!-- 매퍼 패키지 경로 -->
+    <select id="retrieveAll" resultType="com.mybatis.kdt9.domain.User"> <!-- 어떤 객체로 매핑될지 작성 -->
+        SELECT user.* FROM user
+    </select>
+
+<!--    <select id="getUserList" resultType="com.mybatis.kdt9.domain.User">-->
+<!--        SELECT user.* FROM user-->
+<!--        <where>-->
+<!--            <if test="name != null">  // 동적 쿼리-->
+<!--                AND name = #{name}-->
+<!--            </if>-->
+<!--            <if test="email != null"> // 동적 쿼리-->
+<!--                AND email = #{email}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+</mapper>
