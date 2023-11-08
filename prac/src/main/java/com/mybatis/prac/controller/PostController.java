@@ -5,8 +5,10 @@ import com.mybatis.prac.dto.PostDTO;
 import com.mybatis.prac.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -14,28 +16,38 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @GetMapping("/")
-    @ResponseBody
-    public List<PostDTO> getPost() {
+    @GetMapping("/board")
+    public String getPost(Model model) {
         List<PostDTO> posts = postService.getPostList();
-        return posts;
+        model.addAttribute("list", posts);
+        return "board";
     }
 
-    @PostMapping("/write")
+    @GetMapping("/board/search")
     @ResponseBody
-    public boolean wirtePost(@RequestBody PostDTO postDTO) {
-        return postService.insertPost(postDTO);
+    public HashMap<String, Object> searchBoard(@RequestParam String word, Model model) {
+        List<PostDTO> posts = postService.searchPost(word);
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("cnt", posts.size());
+        data.put("list", posts);
+        return data;
     }
 
-    @PatchMapping("/update")
+    @PostMapping("/board")
     @ResponseBody
-    public boolean updatePost(@RequestBody PostDTO postDTO) {
-        return postService.updatePost(postDTO);
+    public void writePost(@RequestBody PostDTO postDTO) {
+        postService.insertPost(postDTO);
     }
 
-    @DeleteMapping("/del")
+    @PatchMapping("/board")
     @ResponseBody
-    public boolean deletePost(@RequestBody PostDTO postDTO) {
-        return postService.deletePost(postDTO);
+    public void updatePost(@RequestBody PostDTO postDTO) {
+        postService.updatePost(postDTO);
+    }
+
+    @DeleteMapping("/board")
+    @ResponseBody
+    public void deletePost(@RequestParam int id) {
+        postService.deletePost(id);
     }
 }

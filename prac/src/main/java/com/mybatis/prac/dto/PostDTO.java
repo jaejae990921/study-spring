@@ -2,12 +2,10 @@ package com.mybatis.prac.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
-@Setter
 @Builder
 public class PostDTO {
     private int id;
@@ -15,4 +13,5 @@ public class PostDTO {
     private String content;
     private String writer;
     private Date registered;
+    private String no;
 }

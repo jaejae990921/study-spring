@@ -6,4 +6,20 @@
     <select id="retrieveAll" resultType="com.mybatis.prac.domain.Post">
         SELECT * FROM post
     </select>
+
+    <insert id="insertPost" parameterType="map">
+        INSERT INTO post(title, content, writer) VALUES (#{title}, #{content}, #{writer})
+    </insert>
+
+    <update id="updatePost" parameterType="map">
+        UPDATE post SET title = #{title}, content = #{content}, writer = #{writer} WHERE id = #{id}
+    </update>
+
+    <delete id="deletePost" parameterType="Integer">
+        DELETE FROM post WHERE id = #{id}
+    </delete>
+
+    <select id="searchPost" resultType="com.mybatis.prac.domain.Post">
+        SELECT * FROM post WHERE title LIKE CONCAT('%', #{word}, '%')
+    </select>
 </mapper>

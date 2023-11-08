@@ -13,12 +13,11 @@ import java.util.List;
 public interface PostMapper {
     List<Post> retrieveAll();
 
-    @Insert("INSERT INTO post (title, content, writer) VALUES (#{title}, #{content}, #{writer})")
     void insertPost(Post post);
 
-    @Update("UPDATE post SET title = #{title}, content = #{content} WHERE id = #{id}")
     void updatePost(Post post);
 
-    @Delete("DELETE FROM post WHERE id = #{id}")
-    void deletePost(Post post);
+    void deletePost(int id);
+
+    List<Post> searchPost(String word);
 }
